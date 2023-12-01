@@ -29,7 +29,7 @@ Make sure you have given permission to execute (`chmod +x run_all.sh`).
 
 | Day | Name        | Stars |
 | --- | ----------- | ----- |
-| 01  | Trebuchet?! | ⭐     |
+| 01  | Trebuchet?! | ⭐⭐  |
 | 02  |             |       |
 | 03  |             |       |
 | 04  |             |       |
