@@ -30,7 +30,7 @@ Make sure you have given permission to execute (`chmod +x run_all.sh`).
 | Day | Name           | Stars |
 | --- | -------------- | ----- |
 | 01  | Trebuchet?!    | ⭐⭐    |
-| 02  | Cube Conundrum | ⭐     |
+| 02  | Cube Conundrum | ⭐⭐    |
 | 03  |                |       |
 | 04  |                |       |
 | 05  |                |       |

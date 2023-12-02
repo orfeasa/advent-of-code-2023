@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import List, Dict
+import math
 
 
 class Color(Enum):
@@ -29,13 +30,11 @@ def part_one(filename: str) -> int:
         Color.GREEN: 13,
         Color.BLUE: 14,
     }
-
     id_sum = 0
-
     for game in games:
         game_is_possible = True
         for cube_set in game.sets:
-            for color in total_cubes:
+            for color in text_to_color:
                 if color in cube_set and cube_set[color] > total_cubes[color]:
                     game_is_possible = False
                     break
@@ -45,7 +44,14 @@ def part_one(filename: str) -> int:
 
 
 def part_two(filename: str) -> int:
-    return 0
+    games = parse_input(filename)
+    return sum(
+        math.prod(
+            max(cube_set.get(text_to_color[color], 0) for cube_set in game.sets)
+            for color in text_to_color
+        )
+        for game in games
+    )
 
 
 def parse_input(filename: str) -> List[GameData]:
