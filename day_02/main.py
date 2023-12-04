@@ -1,7 +1,6 @@
+import math
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import List, Dict
-import math
 
 
 class Color(Enum):
@@ -20,7 +19,7 @@ text_to_color = {
 @dataclass
 class GameData:
     game_id: int
-    sets: List[Dict[Color, int]]
+    sets: list[dict[Color, int]]
 
 
 def part_one(filename: str) -> int:
@@ -47,14 +46,14 @@ def part_two(filename: str) -> int:
     games = parse_input(filename)
     return sum(
         math.prod(
-            max(cube_set.get(text_to_color[color], 0) for cube_set in game.sets)
-            for color in text_to_color
+            max(cube_set.get(color_val, 0) for cube_set in game.sets)
+            for color_val in text_to_color.values()
         )
         for game in games
     )
 
 
-def parse_input(filename: str) -> List[GameData]:
+def parse_input(filename: str) -> list[GameData]:
     with open(filename, encoding="utf8") as f:
         lines = [line.strip() for line in f.readlines()]
     games = []
@@ -64,9 +63,9 @@ def parse_input(filename: str) -> List[GameData]:
         color_sets = parts[1].split("; ")
 
         sets = []
-        for set in color_sets:
+        for color_set in color_sets:
             color_count = {}
-            for color_info in set.split(", "):
+            for color_info in color_set.split(", "):
                 count, color_text = color_info.split(" ")
                 color_count[text_to_color[color_text]] = int(count)
             sets.append(color_count)

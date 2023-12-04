@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Set, Tuple
 
 
 @dataclass(eq=True, frozen=True)
@@ -10,7 +9,7 @@ class PartNumber:
     value: int
 
     @property
-    def neighbors(self) -> Set[Tuple[int, int]]:
+    def neighbors(self) -> set[tuple[int, int]]:
         return {(self.x_start - 1, self.y), (self.x_end + 1, self.y)}.union(
             {
                 (x_n, y_n)
@@ -35,7 +34,7 @@ def part_two(filename: str) -> int:
     return 0
 
 
-def parse_input(filename: str) -> Tuple[Set[Tuple[int, int]], Set[Tuple[int, int]]]:
+def parse_input(filename: str) -> tuple[set[tuple[int, int]], set[tuple[int, int]]]:
     with open(filename, encoding="utf8") as f:
         lines = [line.strip() for line in f.readlines()]
 

@@ -29,10 +29,10 @@ Make sure you have given permission to execute (`chmod +x run_all.sh`).
 
 | Day | Name           | Stars |
 | --- | -------------- | ----- |
-| 01  | Trebuchet?!    | ⭐⭐    |
-| 02  | Cube Conundrum | ⭐⭐    |
-| 03  | Gear Ratios    | ⭐     |
-| 04  |                |       |
+| 01  | Trebuchet?!    | ⭐⭐  |
+| 02  | Cube Conundrum | ⭐⭐  |
+| 03  | Gear Ratios    | ⭐    |
+| 04  | Scratchcards   |       |
 | 05  |                |       |
 | 06  |                |       |
 | 07  |                |       |
@@ -81,5 +81,5 @@ Then find the row with "session" as name, copy the value and paste it in your ne
 ## Linting
 
 ```sh
-black . && isort . && pylint ** && flake8 --max-line-length=100
+black . && isort . && pylint --disable=C0114 --disable=C0116 --disable=C0115 **/*.py && flake8 --max-line-length=100
 ```
