@@ -1,12 +1,14 @@
 #!/bin/bash
 
-for i in $(seq -f "%02g" 1 25)
+for day in {01..25}
 do
-    PYFILE="./day_$i/main.py"
-    if test -f "$PYFILE";
-    then
-        echo "#### Day $i ####"
-        python3.10 "$PYFILE"
-        printf "\n"
+    PYFILE="./day_$day/main.py"
+    if [[ -f "$PYFILE" ]]; then
+        echo "#### Day $day ####"
+        if command -v python3.10 &>/dev/null; then
+            python3.10 "$PYFILE" && printf "\n"
+        else
+            echo "Error: Python 3.10 is not installed."
+        fi
     fi
 done
