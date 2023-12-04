@@ -1,3 +1,4 @@
+import math
 from dataclasses import dataclass
 
 
@@ -24,23 +25,33 @@ def part_one(filename: str) -> int:
     return sum(
         part.value
         for part in parts
-        if len(symbol_coordinates.intersection(part.neighbors)) > 0
+        if len(set(symbol_coordinates).intersection(part.neighbors)) > 0
     )
 
 
 def part_two(filename: str) -> int:
     symbol_coordinates, parts = parse_input(filename)
-    # find gears that are adjacent to exactly 2 part numbers
-    return 0
+    gear_to_parts = {
+        (x, y): {part for part in parts if (x, y) in part.neighbors}
+        for (x, y), ch in symbol_coordinates.items()
+        if ch == "*"
+    }
+    return sum(
+        math.prod(part.value for part in gear_parts)
+        for gear_parts in gear_to_parts.values()
+        if len(gear_parts) == 2
+    )
 
 
-def parse_input(filename: str) -> tuple[set[tuple[int, int]], set[tuple[int, int]]]:
+def parse_input(
+    filename: str,
+) -> tuple[set[tuple[int, int]], dict[tuple[int, int], str]]:
     with open(filename, encoding="utf8") as f:
         lines = [line.strip() for line in f.readlines()]
 
     numbers_chars = {str(ch) for ch in range(0, 10)}
     symbol_coordinates = {
-        (x, y)
+        (x, y): ch
         for y, line in enumerate(lines)
         for x, ch in enumerate(line)
         if ch not in numbers_chars.union({"."})

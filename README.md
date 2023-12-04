@@ -31,7 +31,7 @@ Make sure you have given permission to execute (`chmod +x run_all.sh`).
 | --- | -------------- | ----- |
 | 01  | Trebuchet?!    | ⭐⭐  |
 | 02  | Cube Conundrum | ⭐⭐  |
-| 03  | Gear Ratios    | ⭐    |
+| 03  | Gear Ratios    | ⭐⭐  |
 | 04  | Scratchcards   |       |
 | 05  |                |       |
 | 06  |                |       |
