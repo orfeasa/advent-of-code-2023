@@ -11,13 +11,12 @@ class PartNumber:
 
     @property
     def neighbors(self) -> set[tuple[int, int]]:
-        return {(self.x_start - 1, self.y), (self.x_end + 1, self.y)}.union(
-            {
-                (x_n, y_n)
-                for x_n in range(self.x_start - 1, self.x_end + 2)
-                for y_n in [self.y - 1, self.y + 1]
-            }
-        )
+        return {
+            (x, self.y + dy)
+            for x in range(self.x_start - 1, self.x_end + 2)
+            for dy in [-1, 0, 1]
+            if dy != 0 or x not in [self.x_start, self.x_end]
+        }
 
 
 def part_one(filename: str) -> int:
@@ -32,8 +31,8 @@ def part_one(filename: str) -> int:
 def part_two(filename: str) -> int:
     symbol_coordinates, parts = parse_input(filename)
     gear_to_parts = {
-        (x, y): {part for part in parts if (x, y) in part.neighbors}
-        for (x, y), ch in symbol_coordinates.items()
+        coord: {part for part in parts if coord in part.neighbors}
+        for coord, ch in symbol_coordinates.items()
         if ch == "*"
     }
     return sum(
@@ -49,7 +48,7 @@ def parse_input(
     with open(filename, encoding="utf8") as f:
         lines = [line.strip() for line in f.readlines()]
 
-    numbers_chars = {str(ch) for ch in range(0, 10)}
+    numbers_chars = set(map(str, range(10)))
     symbol_coordinates = {
         (x, y): ch
         for y, line in enumerate(lines)
@@ -66,10 +65,7 @@ def parse_input(
                     x += 1
                 parts.add(
                     PartNumber(
-                        x_start=x_start,
-                        x_end=x,
-                        y=y,
-                        value=int(line[x_start : x + 1]),
+                        x_start=x_start, x_end=x, y=y, value=int(line[x_start : x + 1])
                     )
                 )
             x += 1
